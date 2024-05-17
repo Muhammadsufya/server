@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        form {
+            text-align: center;
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1em;
+        }
+        .adsense {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Downloader</h1>
+    <form id="download-form">
+        <input type="text" id="url" placeholder="Enter YouTube URL" required>
+        <select id="format">
+            <option value="mp4">MP4 (Video)</option>
+            <option value="audio">MP3 (Audio)</option>
+        </select>
+        <select id="quality">
+            <option value="highest">Highest Quality</option>
+            <option value="1080p">1080p</option>
+            <option value="720p">720p</option>
+            <option value="480p">480p</option>
+        </select>
+        <button type="submit">Download</button>
+    </form>
+    <div class="adsense">
+        <!-- Google AdSense Code Placeholder -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    <script>
+        document.getElementById('download-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const format = document.getElementById('format').value;
+            const quality = document.getElementById('quality').value;
+
+            window.location.href = `/download?url=${encodeURIComponent(url)}&format=${format}&quality=${quality}`;
+        });
+    </script>
+</body>
+</html>
