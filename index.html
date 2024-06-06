@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube to MP4 Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .ads {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 90px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube to MP4 Converter</h1>
+        <input type="text" id="youtubeUrl" placeholder="Enter YouTube video URL">
+        <button onclick="convertVideo()">Convert and Download</button>
+        <div id="downloadLink"></div>
+        <div class="ads">
+            <!-- Google Ads space -->
+            <!-- Replace with your Google Ads code -->
+            <p>Ad Space</p>
+        </div>
+    </div>
+    <script>
+        function convertVideo() {
+            const url = document.getElementById('youtubeUrl').value;
+            fetch('/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('downloadLink').innerHTML = `<a href="${data.downloadUrl}" download><button>Download Video</button></a>`;
+                } else {
+                    document.getElementById('downloadLink').innerHTML = `<p>${data.message}</p>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
